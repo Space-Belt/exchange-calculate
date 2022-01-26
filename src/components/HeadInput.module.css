@@ -1,0 +1,23 @@
+.input_container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 25%;
+}
+
+.input_form {
+  width: 47%;
+  height: 40%;
+  /* margin: auto; */
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.select_box {
+  width: 47%;
+  height: 40%;
+  text-align: center;
+  border: 2px solid black;
+  /* margin: auto; */
+  border-radius: 5px;
+}

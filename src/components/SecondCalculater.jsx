@@ -5,6 +5,7 @@ function SecondCalculater() {
   const [exchange, setExchange] = useState([]);
   const [country, setCountry] = useState("KRW");
   const [money, setMoney] = useState(0);
+  const [commaMoney, setCommaMoney] = useState("");
 
   const getExchange = async () => {
     const response = await fetch(
@@ -28,8 +29,8 @@ function SecondCalculater() {
     } else if (event.type === "change" && isNaN(changeMoney)) {
       return;
     }
+    setCommaMoney(Number(changeMoney).toLocaleString());
     setMoney(changeMoney);
-    changeMoney = Number(changeMoney).toLocaleString();
   };
 
   const handleSubmit = (event) => {
@@ -69,23 +70,26 @@ function SecondCalculater() {
               className={styles.howMuch}
               onChange={showMoneyChange}
               onKeyUp={showMoneyChange}
-              value={money}
+              value={commaMoney}
             />
             &nbsp;&nbsp; USD
-            <button type="submit" className={styles.submitBtn}>
-              Submit
-            </button>
           </div>
         </form>
         <div>
-          {/* <p>송금액을 제대로 입력해주세요.</p> */}
           <p>
-            수취금액은{" "}
-            {Number(money * exchange["USD" + country])
-              .toLocaleString()
-              .slice(0, -1)}{" "}
-            {country}
-            입니다.
+            {Number(money) < 0 || Number(money) > 1000000 ? (
+              <p> 송금액이 바르지 않습니다 </p>
+            ) : (
+              <p>
+                수취 금액은&nbsp;
+                {Number(money * exchange["USD" + country])
+                  .toLocaleString()
+                  .slice(0, -1)}
+                &nbsp;
+                {country}
+                입니다.
+              </p>
+            )}
           </p>
         </div>
       </div>
